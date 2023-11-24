@@ -9,6 +9,20 @@
 
 def branch_and_bound(scheduled_tasks: list, unscheduled_tasks: list, length: int, tasks: list[dict[str, int]], best_solution: dict) -> bool:
 
+    """
+        Branch-and-bound algorithm for task scheduling.
+
+        Args:
+        - scheduled_tasks (list): List of tasks already scheduled.
+        - unscheduled_tasks (list): List of tasks yet to be scheduled.
+        - length (int): Current time length of the schedule.
+        - tasks (list[dict[str, int]]): List of tasks with release times, processing times, and deadlines.
+        - best_solution (dict): Dictionary to store the best solution found with keys 'upper_bound' and 'schedule'.
+
+        Returns:
+        - bool: True if an optimal feasible solution is found, False otherwise.
+    """
+
     # (1) make sure that all unassigned tasks will not miss their deadline if assigned
     for t in unscheduled_tasks:
         if max(length, tasks[t]['release_time']) + tasks[t]['processing_time'] > tasks[t]['deadline']:
